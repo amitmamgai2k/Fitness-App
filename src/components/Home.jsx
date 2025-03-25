@@ -2,7 +2,9 @@ import { SafeAreaView, Text, View, Pressable } from 'react-native';
 import React from 'react';
 import tw from '../../tailwind';
 
-const Home = ({ navigation }) => {
+const Home = ({  navigation,route }) => {
+  const { userData } = route.params || {};
+  console.log('userData', userData);
   return (
     <SafeAreaView style={tw`flex-1 bg-gray-100 justify-center items-center`}>
       <Text style={tw`text-2xl font-bold text-black mb-4`}>Welcome to Your Workouts!</Text>
