@@ -1,15 +1,41 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import Start from './src/components/start'
+import { SafeAreaView, Image, Dimensions, Text, View, Pressable } from "react-native";
+import React from "react";
+import Start from "./src/components/Start";
+import Home from "./src/components/Home";
+import InputFrom from "./src/components/InputFrom";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+const Stack = createNativeStackNavigator();
 
 const App = () => {
-  return (
-    <View style={{flex:1}}>
-     <Start/>
-    </View>
-  )
-}
+	return (
+		<NavigationContainer>
+			<Stack.Navigator initialRouteName="Start">
+				<Stack.Screen
+          name="Start"
+          component={Start}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+        name = 'Home'
+        component={Home}
+        options={{
+            headerShown: false,
+          }}
+        />
+         <Stack.Screen
+        name = 'Form'
+        component={InputFrom}
+        options={{
+            headerShown: false,
+          }}
+        />
+			</Stack.Navigator>
+		</NavigationContainer>
+	);
+};
 
-export default App
-
-const styles = StyleSheet.create({})
+export default App;

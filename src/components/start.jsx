@@ -4,7 +4,7 @@ import tw from '../../tailwind';
 
 
 
-const Start = () => {
+const Start = ({ navigation }) => {
   return (
     <SafeAreaView style={tw`flex-1`}>
       <Image
@@ -22,7 +22,7 @@ const Start = () => {
           {/* Button */}
           <Pressable
             style={tw`bg-red-500 rounded-full py-4 w-full shadow-lg border-2 border-white`}
-            onPress={() => console.log('Button pressed!')} // Add your action here
+            onPress={() =>navigation.navigate('Form')} // Add your action here
           >
             <Text style={tw`text-white text-center text-lg font-bold`}>
               Get Started
