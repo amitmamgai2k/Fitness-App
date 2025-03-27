@@ -1,69 +1,54 @@
 const bodyParts = [
-    {
-      id: 0,
-      title: "Back",
-      image: "https://img.freepik.com/free-photo/muscular-man-showing-back-muscles_144627-8307.jpg"
-    },
-    {
-      id: 1,
-      title: "Cardio",
-      image: "https://cdn.pixabay.com/photo/2017/05/25/15/08/jogging-2343558_1280.jpg"
-    },
-    {
-      id: 2,
-      title: "Chest",
-      image: "https://img.freepik.com/free-photo/muscular-build-man-making-effort-while-training-gym_651396-1696.jpg"
-    },
-    {
-      id: 4,
-      title: "Legs",
-      image: "https://img.freepik.com/free-photo/muscular-build-man-lifting-heavy-barbell-dark-floor-against-black-background_651396-2232.jpg"
-    },
-    {
-      id: 5,
-      title: "Neck",
-      image: "https://img.freepik.com/free-photo/side-view-man-stretching-his-neck_23-2148285686.jpg"
-    },
-    {
-      id: 6,
-      title: "Shoulders",
-      image: "https://img.freepik.com/free-photo/muscular-young-male-bodybuilder-doing-exercise-shoulders-pumping-with-dumbbells_613910-11467.jpg"
-    },
-    {
-      id: 9,
-      title: "Waist",
-      image: "https://img.freepik.com/free-photo/athletic-shirtless-young-male-fitness-model-holds-dumbbell-with-light-isolated-dark-background_613910-20.jpg"
-    },
-    {
-      id: 10,
-      title: "Core",
-      image: "https://img.freepik.com/free-photo/young-bodybuilder-showing-strong-abs_651396-433.jpg"
-    },
-    {
-      id: 11,
-      title: "Full Body",
-      image: "https://img.freepik.com/free-photo/portrait-handsome-muscular-man-posing_144627-9495.jpg"
-    },
-    {
-      id: 12,
-      title: "Abs",
-      image: "https://img.freepik.com/free-photo/strong-shirtless-young-fitness-man-with-perfect-abs-muscles_613910-3176.jpg"
-    },
-    {
-      id: 13,
-      title: "Biceps",
-      image: "https://img.freepik.com/free-photo/handsome-power-athletic-man-diet-training-pumping-up-biceps-muscles_176420-1158.jpg"
-    },
-    {
-      id: 14,
-      title: "Triceps",
-      image: "https://img.freepik.com/free-photo/muscular-man-doing-triceps-workout-gym_651396-1192.jpg"
-    },
-    {
-      id: 15,
-      title: "Forearms",
-      image: "https://img.freepik.com/free-photo/close-up-man-holding-weight_23-2149861274.jpg"
-    }
-  ];
+  {
+    id: 0,
+    title: "Back",
+    image: "https://eu.gymshark.com/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2F8urtyqugdt2l%2FfIOvOyiWNuyVnlhs7LnFt%2F9d2b2df51fdce86e93c0d1b0d28afc1e%2Fdesktop-cbum-back-workout.jpg&w=3840&q=85"
+  },
+  {
+    id: 1,
+    title: "Cardio",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUdhExvsOI7_pNSsArNyeGLvPUR6Qc-PQ6Wg&s"
+  },
+  {
+    id: 2,
+    title: "Chest",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1Dl5VwnnGnFJi_dtqGs4ssPT4Bxznc_J4TQ&s"
+  },
+  {
+    id: 3,
+    title: "Lower Arms",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJWGQg6NO8D_Pt_gkHqoUtfmhN-oKM-7rwcQ&s"
+  },
+  {
+    id: 4,
+    title: "Lower Legs",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7dlZCXzyTLD1A56ode1D0ZC__rurApksTXg&s"
+  },
+  {
+    id: 5,
+    title: "Neck",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShrzN9COWhGjfCcJ1GXfsms1bd3ANJ39Vquw&s"
+  },
+  {
+    id: 6,
+    title: "Shoulders",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyjL8m4PR4uRzowa6ZNzARI6PnGQkEpTKH4w&s"
+  },
+  {
+    id: 7,
+    title: "Upper Arms",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1NsTyfJG1tGQlMLyFoTSY855vp04TYQnO3Q&s"
+  },
+  {
+    id: 8,
+    title: "Upper Legs",
+    image: "https://hips.hearstapps.com/hmg-prod/images/young-man-training-on-a-leg-machine-in-the-gym-royalty-free-image-1704212901.jpg?crop=1xw:0.84415xh;center,top&resize=1200:*"
+  },
+  {
+    id: 9,
+    title: "Waist",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_THRPSoy6Nb-qr2NBQFMs_z78UfOnbBiohA&s"
+  }
+];
 
-  export default bodyParts;
+export default bodyParts;

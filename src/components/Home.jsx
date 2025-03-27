@@ -2,9 +2,10 @@ import { SafeAreaView, Text, View, Image } from 'react-native';
 import React from 'react';
 import tw from '../../tailwind';
 import { StatusBar } from 'expo-status-bar';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+
 import ImageSlider from './ImageSlider';
 import Exercise from './Exercise';
+import WeeklyExercise from './WeeklyExercise';
 
 const Home = ({ navigation, route }) => {
   const { userData } = route.params || {};
@@ -18,6 +19,7 @@ const Home = ({ navigation, route }) => {
           <View>
             <Text style={tw`text-4xl text-gray-800 font-bold tracking-wider`}>READY TO</Text>
             <Text style={tw`text-4xl text-pink-600 font-bold tracking-wider`}>WORKOUT</Text>
+
 
           </View>
           <View style={tw`w-10 h-10 rounded-full  mr-5 mt-[-32]`}>
@@ -33,7 +35,8 @@ const Home = ({ navigation, route }) => {
         <View>
           <ImageSlider/>
         </View>
-        <View style={tw`text-3xl font-bold `}><Exercise/></View>
+        <Exercise navigation={navigation} />
+        <View ><WeeklyExercise /></View>
 
 
 

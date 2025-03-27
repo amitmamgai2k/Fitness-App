@@ -22,7 +22,7 @@ const Start = ({ navigation }) => {
           {/* Button */}
           <Pressable
             style={tw`bg-red-500 rounded-full py-4 w-full shadow-lg border-2 border-white`}
-            onPress={() =>navigation.navigate('Form')} // Add your action here
+            onPress={() =>navigation.navigate('Form')}
           >
             <Text style={tw`text-white text-center text-lg font-bold`}>
               Get Started

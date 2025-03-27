@@ -5,13 +5,13 @@ import bodyParts from './Images';
 
 
 
-const Exercise = () => {
+const Exercise = ({navigation}) => {
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   return (
     <View style={tw`mt-6 `}>
-      <Text style={tw`text-3xl text-gray-900 font-bold mb-5`}>
-        Exercise Categoriess
+      <Text style={tw`text-4xl text-gray-900 font-bold mb-2 tracking-wider`}>
+        Exercise Categories
       </Text>
       <ScrollView
         horizontal
@@ -21,7 +21,12 @@ const Exercise = () => {
         {bodyParts.map((part) => (
           <TouchableOpacity
             key={part.id}
-            onPress={() => setSelectedCategory(part.id)}
+            onPress={() => {
+                navigation.navigate('Workout',{title:part.title, image:part.image});
+                setSelectedCategory(part.id);
+
+            }}
+
             style={[
               tw`mr-4 rounded-xl overflow-hidden shadow-md`,
               {
