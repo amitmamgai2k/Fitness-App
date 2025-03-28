@@ -1,10 +1,10 @@
-import { StyleSheet, Text, View, Image, ScrollView,ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView,ActivityIndicator, TouchableOpacity } from 'react-native';
 import { useState,useEffect } from 'react';
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import tw from '../../tailwind';
 
-const AllExercise = ({ route }) => {
+const AllExercise = ({ navigation,route }) => {
   const { title } = route.params || {};
   const { image } = route.params || {};
   const [exercise, setExercises] = useState([]);
@@ -14,7 +14,7 @@ const AllExercise = ({ route }) => {
 
   const getExercises = async () => {
     try {
-      const response = await fetch(`https://exercisedb.p.rapidapi.com/exercises/bodyPart/${title.toLowerCase()}?limit=30&offset=0`, {
+      const response = await fetch(`https://exercisedb.p.rapidapi.com/exercises/bodyPart/${title.toLowerCase()}?limit=30&offsert=0`, {
         method: 'GET',
         headers: {
           'X-RapidAPI-Key': API_KEY,
@@ -67,9 +67,14 @@ const AllExercise = ({ route }) => {
 
           <View style={tw`flex-row flex-wrap justify-between gap-2`}>
             {exercise.map((item, index) => (
-              <View
+
+              <TouchableOpacity
                 key={index}
-                style={tw`w-[48%] h-60 bg-gray-100 mb-1 rounded-xl pt-4 pb-4 items-center justify-between shadow-md`}
+                activeOpacity={0.3}
+                onPress={() => navigation.navigate('ExerciseDetails', { exercise: item })}
+
+
+                style={tw`w-[48%] h-60 bg-gray-100 mb-1 rounded-xl pt-4 pb-4 items-center justify-between shadow-md shadow-gray-900`}
               >
                 <Image
               source={item.gifUrl ? { uri: item.gifUrl } : require('../../assets/male-icon.png')}
@@ -78,9 +83,11 @@ const AllExercise = ({ route }) => {
                 <Text style={tw`text-black text-lg text-center font-semibold bg-gray-100 px-2 py-1 rounded-xl`}>
                 {item.name.toUpperCase()}
                 </Text>
-              </View>
+
+              </TouchableOpacity>
             ))}
-          </View>)
+          </View>
+         )
 }
 
         </View>
