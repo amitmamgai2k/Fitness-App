@@ -70,7 +70,7 @@ const ExerciseDetails = ({ route }) => {
 
 							<Text style={tw`text-2xl font-semibold text-gray-700`}>Follow This Steps For Correct Workout </Text>
 						</View>
-						<View style={tw`pl-3 bg-red-50  p-2 rounded-lg`}>
+						<View style={tw`pl-3 bg-gray-50  p-2 rounded-lg`}>
 							{exercise.instructions && exercise.instructions.length > 0 ? (
 								exercise.instructions.map((instruction, index) => (
 									<View key={index} style={tw`flex-row mb-1`}>

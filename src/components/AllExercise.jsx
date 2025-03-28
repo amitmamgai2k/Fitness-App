@@ -10,7 +10,7 @@ const AllExercise = ({ navigation,route }) => {
   const [exercise, setExercises] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const API_KEY = 'f21b049adfmsh949b3b50c4cae42p1f3cb0jsnf76c04510318'; // replace with your key
+  const API_KEY = 'f21b049adfmsh949b3b50c4cae42p1f3cb0jsnf76c04510318';
 
   const getExercises = async () => {
     try {
