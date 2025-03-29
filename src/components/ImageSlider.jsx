@@ -16,8 +16,8 @@ const ImageSlider = () => {
       title: 'Weight Training'
     },
     {
-      uri: 'https://images.unsplash.com/photo-1518310383802-640c2de311b6',
-      title: 'HIIT Workout'
+      uri: 'https://www.mensjournal.com/.image/c_limit%2Ccs_srgb%2Cq_auto:good%2Cw_1400/MjA5MjM2NjAxMzI1MjMzNzc2/weight-loss-exercise-plan.webp',
+      title: 'Fatloss Workout'
     },
     {
       uri: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b',

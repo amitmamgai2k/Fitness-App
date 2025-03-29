@@ -52,6 +52,7 @@ const WeeklyExercise = ({navigation,route}) => {
         <TouchableOpacity
           key={part.week}
           onPress={() => {
+            navigation.navigate('WeekExercise',{title:part.week, image:part.image});
 
               setSelectedCategory(part.week);
 

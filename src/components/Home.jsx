@@ -36,7 +36,7 @@ const Home = ({ navigation, route }) => {
           <ImageSlider/>
         </View>
         <Exercise navigation={navigation} />
-        <View ><WeeklyExercise /></View>
+        <View ><WeeklyExercise navigation={navigation} /></View>
 
 
 

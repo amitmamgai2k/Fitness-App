@@ -7,37 +7,37 @@ const bodyParts = [
   {
     id: 1,
     title: "Cardio",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUdhExvsOI7_pNSsArNyeGLvPUR6Qc-PQ6Wg&s"
+    image: "https://static.nike.com/a/images/f_auto/dpr_1.5,cs_srgb/h_1033,c_limit/d7a055b4-6dff-4e9e-90fe-de00e6eab13c/should-you-do-cardio-before-or-after-weight-training.jpg"
   },
   {
     id: 2,
     title: "Chest",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1Dl5VwnnGnFJi_dtqGs4ssPT4Bxznc_J4TQ&s"
+    image: "https://row.gymshark.com/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2F8urtyqugdt2l%2F4wPk3KafRwgpwIcJzb0VRX%2F4894054c6182c62c1d850628935a4b0b%2Fdesktop-best-chest-exercises.jpg&w=1920&q=85"
   },
   {
     id: 3,
     title: "Lower Arms",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJWGQg6NO8D_Pt_gkHqoUtfmhN-oKM-7rwcQ&s"
+    image: "https://www.dmoose.com/cdn/shop/articles/How_to_Get_Bigger_Arms.jpg?v=1718110113"
   },
   {
     id: 4,
     title: "Lower Legs",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7dlZCXzyTLD1A56ode1D0ZC__rurApksTXg&s"
+    image: "https://thefitnessmaverick.com/wp-content/uploads/2022/11/seated-calf-raise-e1668088378294-930x612.webp"
   },
   {
     id: 5,
     title: "Neck",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShrzN9COWhGjfCcJ1GXfsms1bd3ANJ39Vquw&s"
+    image: "https://www.dmoose.com/cdn/shop/files/Neck_Harness_EBC_5_600x.png?v=1730899602"
   },
   {
     id: 6,
     title: "Shoulders",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyjL8m4PR4uRzowa6ZNzARI6PnGQkEpTKH4w&s"
+    image: "https://cdn.shopify.com/s/files/1/1497/9682/files/4.Standing_Cable_Face_Pull.jpg?v=1680794668"
   },
   {
     id: 7,
     title: "Upper Arms",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1NsTyfJG1tGQlMLyFoTSY855vp04TYQnO3Q&s"
+    image: "https://cdn.muscleandstrength.com/sites/default/files/field/feature-image/workout/serious_biceps_triceps.jpg"
   },
   {
     id: 8,
@@ -47,7 +47,7 @@ const bodyParts = [
   {
     id: 9,
     title: "Waist",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_THRPSoy6Nb-qr2NBQFMs_z78UfOnbBiohA&s"
+    image: "https://i.insider.com/609420e5f22c6b00185dcaa1?width=2000&format=jpeg&auto=webp"
   }
 ];
 
