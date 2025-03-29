@@ -9,6 +9,9 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import tw from '../../tailwind';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Alert } from 'react-native';
+
 
 const InputFrom = ({ navigation }) => {
   const [currentScreen, setCurrentScreen] = useState(0);
@@ -43,13 +46,27 @@ const InputFrom = ({ navigation }) => {
     setUserData({ ...userData, gender });
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (!isCurrentScreenValid()) return;
+
     if (currentScreen < 2) {
       setCurrentScreen(currentScreen + 1);
     } else {
-      console.log('Form completed with data:', userData);
-      navigation.navigate('Home', { userData });
+      try {
+        // Save user data to AsyncStorage
+        await AsyncStorage.setItem('USER_DATA', JSON.stringify(userData));
+        console.log('Data saved locally:', userData);
+
+        // Navigate to Home with the data
+        navigation.navigate('Home', { userData });
+      } catch (error) {
+        console.error('Error saving data:', error);
+        Alert.alert(
+          'Storage Error',
+          'Could not save your data. Please try again.',
+          [{ text: 'OK' }]
+        );
+      }
     }
   };
 
