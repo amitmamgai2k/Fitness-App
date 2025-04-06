@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView } from 'rea
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ArrowLeft, User, Calendar, Ruler } from 'lucide-react-native';
+import YourPlans from './Navigation/YourPlans';
 import tw from '../../tailwind';
 
 
@@ -29,17 +30,17 @@ const UserProfile = ({ navigation, route }) => {
     : `${userData.height.cm} cm`;
 
   return (
-    <SafeAreaView style={tw`flex-1 bg-white`}>
+    <SafeAreaView style={tw`flex-1 bg-gray-50`}>
 
 
 
       <ScrollView showsVerticalScrollIndicator={false}>
 
         {/* User Details Section */}
-        <View style={tw`px-5 pb-6`}>
+        <View style={tw`px-5 `}>
           <Text style={tw`text-2xl font-bold text-gray-800 mb-4 self-center mt-10`}>Personal Information</Text>
 
-          <View style={tw`bg-white rounded-xl shadow-sm mb-6`}>
+          <View style={tw`bg-white rounded-xl shadow-sm `}>
             {/* Name */}
             <View style={tw`flex-row items-center p-4 border-b border-gray-100`}>
               <View style={tw`w-10 h-10 rounded-full bg-pink-100 items-center justify-center mr-4`}>
@@ -87,6 +88,7 @@ const UserProfile = ({ navigation, route }) => {
             </View>
           </View>
         </View>
+        <YourPlans navigation={navigation} />
 
 
       </ScrollView>

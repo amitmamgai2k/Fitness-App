@@ -13,6 +13,7 @@ import UserProfile from "./src/components/UserProfile";
 import WorkoutSessionScreen from "./src/components/StartWorkout";
 import MyWorkouts from "./src/components/Navigation/MyWorkouts";
 import StepCounterApp from "./src/components/DailyStepsCount";
+import CreatePlan from "./src/components/Navigation/CreatePlan";
 
 
 const Stack = createNativeStackNavigator();
@@ -94,6 +95,13 @@ const App = () => {
           <Stack.Screen
         name = 'Steps'
         component={ StepCounterApp }
+        options={{
+            headerShown: false,
+          }}
+        />
+          <Stack.Screen
+        name = 'CreatePlan'
+        component={ CreatePlan }
         options={{
             headerShown: false,
           }}

@@ -72,15 +72,13 @@ const Home = ({ navigation, route }) => {
               <Text style={tw`text-4xl text-gray-800 font-bold tracking-wider`}>READY TO</Text>
               <Text style={tw`text-4xl text-pink-600 font-bold tracking-wider`}>WORKOUT {UserData?.name?.toUpperCase()}</Text>
             </View>
-            <TouchableOpacity
-              style={tw`items-center justify-center`}
-              onPress={() => navigation.navigate('UserProfile', { userData: UserData })}
-            >
+
               <Image
                 source={require('../../assets/avatar.png')}
-                style={tw`w-16 h-16 rounded-full`}
+                style={tw`w-16 h-16 rounded-full `}
+                resizeMode="cover"
               />
-            </TouchableOpacity>
+
           </View>
 
           {/* Image Slider */}
@@ -108,7 +106,7 @@ const Home = ({ navigation, route }) => {
           <List size={24} color="#6b7280" />
           <Text style={tw`text-xs text-gray-600 mt-1`}>My Workout</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('CreateWorkoutPlan')} style={tw`items-center`}>
+        <TouchableOpacity onPress={() => navigation.navigate('CreatePlan')} style={tw`items-center`}>
           <Target size={24} color="#6b7280" />
           <Text style={tw`text-xs text-gray-600 mt-1`}>Create Plan</Text>
         </TouchableOpacity>
@@ -116,7 +114,7 @@ const Home = ({ navigation, route }) => {
           <List size={24} color="#6b7280" />
           <Text style={tw`text-xs text-gray-600 mt-1`}>Today Steps</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('UserProfile')} style={tw`items-center`}>
+        <TouchableOpacity onPress={() => navigation.navigate('UserProfile', { userData: UserData })} style={tw`items-center`}>
           <User size={24} color="#6b7280" />
           <Text style={tw`text-xs text-gray-600 mt-1`}>Profile</Text>
         </TouchableOpacity>
