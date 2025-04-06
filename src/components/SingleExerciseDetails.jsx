@@ -12,7 +12,7 @@ const SingleExerciseDetails = ({ route, navigation }) => {
   const [muted, setMuted] = useState(false); // Initialize as unmuted
 
   // Get the exercise data from navigation params
-  const { exercise, color = "#db2777", dayTitle } = route.params || {};
+  const { workout,exercise, color = "#db2777", title } = route.params || {};
 
   // If no exercise data is provided, show an error state
   if (!exercise) {
@@ -168,7 +168,7 @@ const SingleExerciseDetails = ({ route, navigation }) => {
         {/* Exercise title and basic info */}
         <View style={tw`p-5`}>
           <Text style={tw`text-3xl font-bold text-gray-800 mb-1`}>{name}</Text>
-          <Text style={tw`text-lg text-gray-600 mb-4`}>{dayTitle} Workout</Text>
+          <Text style={tw`text-lg text-gray-600 mb-4`}>{title} Workout</Text>
 
           <View style={tw`flex-row flex-wrap mb-4`}>
             {muscle && (
@@ -272,7 +272,11 @@ const SingleExerciseDetails = ({ route, navigation }) => {
 
           <TouchableOpacity
             style={[tw`flex-1 py-3 rounded-xl items-center ml-2`, { backgroundColor: color }]}
-            onPress={() => console.log('Start this exercise')}
+            onPress={() => navigation.navigate('WorkoutSessionScreen', {
+              title: title,
+              workout: workout,
+              color: color
+            })}
           >
             <Text style={tw`font-bold text-white`}>Start Exercise</Text>
           </TouchableOpacity>

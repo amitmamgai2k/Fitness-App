@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Gym_App",
-    "slug": "Gym_App",
+    "name": "FlexFit",
+    "slug": "FlexFit",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -10,7 +10,7 @@
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#1e1d26"
+      "backgroundColor": "#000000"
     },
     "ios": {
       "supportsTablet": true
@@ -18,11 +18,21 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+        "backgroundColor": "#000000"
+      },
+      "permissions": [
+        "android.permission.ACTIVITY_RECOGNITION"
+      ],
+      "package": "com.amitmamgai2k.FlexFit"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "f9ef7f6e-8fad-4eed-a1ef-7c5eb95a27c8"
+      }
+    },
+    "owner": "amitmamgai2k"
   }
 }

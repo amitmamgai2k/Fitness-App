@@ -108,7 +108,9 @@ const WeekExerciseDetails = ({ route, navigation }) => {
                     onPress={() => navigation.navigate('ExerciseDetail', {
                       exercise: exercise,
                       color: color,
-                      dayTitle: title
+                      title: title,
+                      workout: workout,
+
                     })}
                   >
                     <Text style={tw`font-semibold text-gray-800 mr-1`}>View</Text>
@@ -152,7 +154,7 @@ const WeekExerciseDetails = ({ route, navigation }) => {
           <View style={tw`px-5 pb-10`}>
             <TouchableOpacity
               style={[tw`py-4 rounded-xl items-center flex-row justify-center`, { backgroundColor: color }]}
-              onPress={() => navigation.navigate('WorkoutExecution', {
+              onPress={() => navigation.navigate('WorkoutSessionScreen', {
                 title: title,
                 workout: workout,
                 color: color

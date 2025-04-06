@@ -1,0 +1,20 @@
+diff --git a/node_modules/react-native-svg/android/.gradle/nb-cache/trust/8144C6A1AFFF37EED99643638B9B4C9AA756096E140BEC6535D6522F02F92C66 b/node_modules/react-native-svg/android/.gradle/nb-cache/trust/8144C6A1AFFF37EED99643638B9B4C9AA756096E140BEC6535D6522F02F92C66
+new file mode 100644
+index 0000000..c0083a7
+--- /dev/null
++++ b/node_modules/react-native-svg/android/.gradle/nb-cache/trust/8144C6A1AFFF37EED99643638B9B4C9AA756096E140BEC6535D6522F02F92C66
+@@ -0,0 +1 @@
++7DF8799449518492EBDB0B29173B86DDCF045948D304FE9ECBAAC535705C8030
+diff --git a/node_modules/react-native-svg/android/src/main/java/com/horcrux/svg/VirtualView.java b/node_modules/react-native-svg/android/src/main/java/com/horcrux/svg/VirtualView.java
+index c414af2..c1286dc 100644
+--- a/node_modules/react-native-svg/android/src/main/java/com/horcrux/svg/VirtualView.java
++++ b/node_modules/react-native-svg/android/src/main/java/com/horcrux/svg/VirtualView.java
+@@ -104,7 +104,7 @@ public abstract class VirtualView extends ReactViewGroup {
+   ArrayList<PathElement> elements;
+   PointerEvents mPointerEvents;
+ 
+-  void setPointerEvents(PointerEvents pointerEvents) {
++  public void setPointerEvents(PointerEvents pointerEvents) {
+     mPointerEvents = pointerEvents;
+   }
+ 

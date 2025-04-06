@@ -10,6 +10,10 @@ import ExerciseDetails from "./src/components/ExerciseDetails";
 import WeekExerciseDetails from "./src/components/WeekExerciseDetails";
 import SingleExerciseDetails from "./src/components/SingleExerciseDetails";
 import UserProfile from "./src/components/UserProfile";
+import WorkoutSessionScreen from "./src/components/StartWorkout";
+import MyWorkouts from "./src/components/Navigation/MyWorkouts";
+import StepCounterApp from "./src/components/DailyStepsCount";
+
 
 const Stack = createNativeStackNavigator();
 
@@ -73,6 +77,30 @@ const App = () => {
             headerShown: false,
           }}
         />
+           <Stack.Screen
+        name = 'WorkoutSessionScreen'
+        component={ WorkoutSessionScreen }
+        options={{
+            headerShown: false,
+          }}
+        />
+         <Stack.Screen
+        name = 'MyWorkouts'
+        component={ MyWorkouts }
+        options={{
+            headerShown: false,
+          }}
+        />
+          <Stack.Screen
+        name = 'Steps'
+        component={ StepCounterApp }
+        options={{
+            headerShown: false,
+          }}
+        />
+
+
+
 
 			</Stack.Navigator>
 		</NavigationContainer>

@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { ArrowLeft, User, Calendar, Ruler } from 'lucide-react-native';
 import tw from '../../tailwind';
 
+
 const UserProfile = ({ navigation, route }) => {
   const { userData } = route.params;
 
@@ -86,6 +87,8 @@ const UserProfile = ({ navigation, route }) => {
             </View>
           </View>
         </View>
+
+
       </ScrollView>
     </SafeAreaView>
   );
