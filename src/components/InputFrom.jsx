@@ -4,17 +4,16 @@ import {
   Text,
   TouchableOpacity,
   Image,
-  Pressable,
-  TextInput
+  ScrollView,
+  TextInput,
+
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import tw from '../../tailwind';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Alert } from 'react-native';
 
-
-const InputFrom = ({ navigation }) => {
-  const [currentScreen, setCurrentScreen] = useState(0);
+const InputForm = ({ navigation }) => {
   const [userData, setUserData] = useState({
     name: '',
     age: '',
@@ -23,19 +22,15 @@ const InputFrom = ({ navigation }) => {
     heightUnit: 'ft_in'
   });
 
-  const isCurrentScreenValid = () => {
-    switch (currentScreen) {
-      case 0:
-        return userData.name.trim() !== '' && userData.age.trim() !== '';
-      case 1:
-        return userData.gender !== '';
-      case 2:
-        return userData.heightUnit === 'cm'
-          ? userData.height.cm > 0
-          : userData.height.feet > 0 || userData.height.inches > 0;
-      default:
-        return false;
-    }
+  const isFormValid = () => {
+    return (
+      userData.name.trim() !== '' &&
+      userData.age.trim() !== '' &&
+      userData.gender !== '' &&
+      (userData.heightUnit === 'cm'
+        ? userData.height.cm > 0
+        : userData.height.feet > 0 || userData.height.inches > 0)
+    );
   };
 
   const handleTextChange = (field, value) => {
@@ -46,33 +41,26 @@ const InputFrom = ({ navigation }) => {
     setUserData({ ...userData, gender });
   };
 
-  const handleNext = async () => {
-    if (!isCurrentScreenValid()) return;
-
-    if (currentScreen < 2) {
-      setCurrentScreen(currentScreen + 1);
-    } else {
-      try {
-        // Save user data to AsyncStorage
-        await AsyncStorage.setItem('USER_DATA', JSON.stringify(userData));
-        console.log('Data saved locally:', userData);
-
-        // Navigate to Home with the data
-        navigation.navigate('Home', { userData });
-      } catch (error) {
-        console.error('Error saving data:', error);
-        Alert.alert(
-          'Storage Error',
-          'Could not save your data. Please try again.',
-          [{ text: 'OK' }]
-        );
-      }
+  const handleSubmit = async () => {
+    if (!isFormValid()) {
+      Alert.alert('Form Incomplete', 'Please fill all required fields.');
+      return;
     }
-  };
 
-  const handleBack = () => {
-    if (currentScreen > 0) {
-      setCurrentScreen(currentScreen - 1);
+    try {
+      // Save user data to AsyncStorage
+      await AsyncStorage.setItem('USER_DATA', JSON.stringify(userData));
+      console.log('Data saved locally:', userData);
+
+      // Navigate to Home with the data
+      navigation.navigate('Home', { userData });
+    } catch (error) {
+      console.error('Error saving data:', error);
+      Alert.alert(
+        'Storage Error',
+        'Could not save your data. Please try again.',
+        [{ text: 'OK' }]
+      );
     }
   };
 
@@ -123,34 +111,44 @@ const InputFrom = ({ navigation }) => {
     });
   };
 
-  const renderNameAgeScreen = () => {
-    return (
-      <View style={tw`flex-1 justify-center items-center px-6`}>
-        <View style={tw`w-full mb-10 items-center`}>
-          <Text style={tw`text-4xl text-gray-800 font-bold mb-3 text-center`}>
-            Personal Information
+  const displayCm = userData.height.cm || ftInToCm(userData.height.feet, userData.height.inches);
+
+  return (
+    <SafeAreaView style={tw`flex-1 bg-white`}>
+      <ScrollView
+        style={tw`flex-1`}
+        contentContainerStyle={tw`px-6 py-8`}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={tw`mb-8 items-center`}>
+          <Text style={tw`text-3xl text-gray-800 font-bold mb-2`}>
+            Your Fitness Profile
           </Text>
-          <Text style={tw`text-gray-600 text-xl text-center`}>
-            Let's set up your fitness profile
+          <Text style={tw`text-gray-600 text-lg text-center`}>
+            Complete your profile to get personalized fitness recommendations
           </Text>
         </View>
 
-        {/* Name Input */}
-        <View style={tw`w-full mb-8`}>
-
+        {/* Name Section */}
+        <View style={tw`mb-6`}>
+          <Text style={tw`text-lg font-semibold text-gray-700 mb-2 ml-1`}>
+            What's your name?
+          </Text>
           <TextInput
-            style={tw`border-2 border-gray-300 rounded-xl p-5 text-xl bg-white w-full text-center`}
+            style={tw`border-2 border-gray-300 rounded-xl p-4 text-lg bg-white`}
             placeholder="Enter your name"
             value={userData.name}
             onChangeText={(text) => handleTextChange('name', text)}
           />
         </View>
 
-        {/* Age Input */}
-        <View style={tw`w-full mb-8`}>
-
+        {/* Age Section */}
+        <View style={tw`mb-6`}>
+          <Text style={tw`text-lg font-semibold text-gray-700 mb-2 ml-1`}>
+            What's your age?
+          </Text>
           <TextInput
-            style={tw`border-2 border-gray-300 rounded-xl p-5 text-xl bg-white w-full text-center`}
+            style={tw`border-2 border-gray-300 rounded-xl p-4 text-lg bg-white`}
             placeholder="Enter your age"
             keyboardType="numeric"
             maxLength={3}
@@ -159,202 +157,168 @@ const InputFrom = ({ navigation }) => {
           />
         </View>
 
-        {/* Tips */}
-        <View style={tw`mt-6 bg-blue-50 p-5 rounded-xl w-full`}>
-          <Text style={tw`text-blue-800 font-medium mb-2 text-lg text-center`}>
-            Why we ask for this
+        {/* Gender Section */}
+        <View style={tw`mb-6`}>
+          <Text style={tw`text-lg font-semibold text-gray-700 mb-4 ml-1`}>
+            What's your gender?
           </Text>
-          <Text style={tw`text-blue-700 text-center text-base`}>
-            Your age and personal details help us create a customized fitness plan that's right for you.
-          </Text>
+          <View style={tw`flex-row justify-around`}>
+            {['male', 'female'].map((gender) => (
+              <TouchableOpacity
+                key={gender}
+                style={[
+                  tw`items-center justify-center p-3 border rounded-lg w-2/5`,
+                  userData.gender === gender
+                    ? tw`bg-blue-50 border-blue-500`
+                    : tw`border-gray-300`
+                ]}
+                onPress={() => handleGenderSelect(gender)}
+              >
+                <Image
+                  source={
+                    gender === 'male'
+                      ? require('../../assets/male-icon.png')
+                      : require('../../assets/female-icon.png')
+                  }
+                  style={tw`w-12 h-16 mb-2`}
+                  resizeMode="contain"
+                />
+                <Text
+                  style={[
+                    tw`text-base`,
+                    userData.gender === gender
+                      ? tw`text-blue-500 font-bold`
+                      : tw`text-gray-500`
+                  ]}
+                >
+                  {gender.charAt(0).toUpperCase() + gender.slice(1)}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
         </View>
-      </View>
-    );
-  };
 
-  const renderGenderScreen = () => (
-    <View style={tw`flex-1 justify-center items-center px-10`}>
-      <View style={tw`flex-row items-center mb-8 w-full`}>
-        <TouchableOpacity onPress={handleBack} style={tw`mr-4`}>
-          <Text style={tw`text-gray-500 text-5xl`}>←</Text>
-        </TouchableOpacity>
-        <Text style={tw`text-2xl text-gray-700 font-medium`}>What's your gender?</Text>
-      </View>
-
-      <View style={tw`flex-row justify-around w-full mb-16`}>
-        {['male', 'female'].map((gender) => (
-          <TouchableOpacity
-            key={gender}
-            style={[
-              tw`items-center justify-center p-4 w-32 border rounded-lg`,
-              userData.gender === gender
-                ? tw`bg-gray-100 border-yellow-500`
-                : tw`border-gray-400`
-            ]}
-            onPress={() => handleGenderSelect(gender)}
-          >
-            <Image
-              source={
-                gender === 'male'
-                  ? require('../../assets/male-icon.png')
-                  : require('../../assets/female-icon.png')
-              }
-              style={tw`w-16 h-24 mb-4`}
-              resizeMode="contain"
-            />
-            <Text
+        {/* Height Section */}
+        <View style={tw`mb-6`}>
+          <Text style={tw`text-lg font-semibold text-gray-700 mb-3 ml-1`}>
+            How tall are you?
+          </Text>
+          <View style={tw`flex-row justify-center mb-5`}>
+            <TouchableOpacity
               style={[
-                tw`text-base`,
-                userData.gender === gender
-                  ? tw`text-yellow-500 font-bold`
-                  : tw`text-gray-400`
+                tw`py-2 px-6 border rounded-l-lg`,
+                userData.heightUnit === 'ft_in'
+                  ? tw`bg-blue-500 border-blue-500`
+                  : tw`bg-gray-100 border-gray-300`
               ]}
+              onPress={() => setUserData({ ...userData, heightUnit: 'ft_in' })}
             >
-              {gender.charAt(0).toUpperCase() + gender.slice(1)}
-            </Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-    </View>
-  );
+              <Text style={tw`${userData.heightUnit === 'ft_in' ? 'text-white' : 'text-gray-700'} font-medium`}>
+                Feet & Inches
+              </Text>
+            </TouchableOpacity>
 
-  const renderHeightScreen = () => {
-    const displayCm = userData.height.cm || ftInToCm(userData.height.feet, userData.height.inches);
+            <TouchableOpacity
+              style={[
+                tw`py-2 px-6 border rounded-r-lg`,
+                userData.heightUnit === 'cm'
+                  ? tw`bg-blue-500 border-blue-500`
+                  : tw`bg-gray-100 border-gray-300`
+              ]}
+              onPress={() => setUserData({ ...userData, heightUnit: 'cm' })}
+            >
+              <Text style={tw`${userData.heightUnit === 'cm' ? 'text-white' : 'text-gray-700'} font-medium`}>
+                Centimeters
+              </Text>
+            </TouchableOpacity>
+          </View>
 
-    return (
-      <View style={tw`flex-1 justify-center items-center px-6`}>
-        <View style={tw`flex-row items-center mb-8 w-full`}>
-          <TouchableOpacity onPress={handleBack} style={tw`mr-4`}>
-            <Text style={tw`text-gray-500 text-5xl`}>←</Text>
-          </TouchableOpacity>
-          <Text style={tw`text-2xl text-gray-700 font-medium`}>How tall are you?</Text>
-        </View>
-
-        <View style={tw`flex-row mb-8`}>
-          <TouchableOpacity
-            style={[
-              tw`py-3 px-8 border rounded-l-lg`,
-              userData.heightUnit === 'ft_in'
-                ? tw`bg-orange-400 border-orange-500`
-                : tw`bg-gray-100 border-gray-300`
-            ]}
-            onPress={() => setUserData({ ...userData, heightUnit: 'ft_in' })}
-          >
-            <Text style={tw`${userData.heightUnit === 'ft_in' ? 'text-white' : 'text-gray-800'} text-lg font-medium`}>
-              Feet & Inches
-            </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={[
-              tw`py-3 px-8 border rounded-r-lg`,
-              userData.heightUnit === 'cm'
-                ? tw`bg-yellow-400 border-yellow-500`
-                : tw`bg-gray-100 border-gray-300`
-            ]}
-            onPress={() => setUserData({ ...userData, heightUnit: 'cm' })}
-          >
-            <Text style={tw`${userData.heightUnit === 'cm' ? 'text-white' : 'text-gray-800'} text-lg font-medium`}>
-              Centimeters
-            </Text>
-          </TouchableOpacity>
-        </View>
-
-        {userData.heightUnit === 'ft_in' ? (
-          <View style={tw`w-full px-4`}>
-            <Text style={tw`text-center text-2xl font-medium mb-4 text-gray-600`}>Enter your height</Text>
-            <View style={tw`flex-row justify-between`}>
-              <View style={tw`flex-1 mr-2`}>
-                <Text style={tw`text-sm text-center text-gray-500 mb-1`}>Feet</Text>
-                <TextInput
-                  style={tw`border-2 border-gray-300 rounded-lg p-4 text-xl bg-white text-center`}
-                  keyboardType="numeric"
-                  maxLength={1}
-                  value={(userData.height.feet || '').toString()}
-                  onChangeText={(text) => handleFeetInput(text)}
-                  placeholder="0"
-                />
+          {userData.heightUnit === 'ft_in' ? (
+            <View style={tw`w-full`}>
+              <View style={tw`flex-row justify-between`}>
+                <View style={tw`flex-1 mr-2`}>
+                  <Text style={tw`text-sm text-gray-500 mb-1 ml-1`}>Feet</Text>
+                  <TextInput
+                    style={tw`border-2 border-gray-300 rounded-lg p-4 text-lg bg-white text-center`}
+                    keyboardType="numeric"
+                    maxLength={1}
+                    value={(userData.height.feet || '').toString()}
+                    onChangeText={(text) => handleFeetInput(text)}
+                    placeholder="0"
+                  />
+                </View>
+                <View style={tw`flex-1 ml-2`}>
+                  <Text style={tw`text-sm text-gray-500 mb-1 ml-1`}>Inches</Text>
+                  <TextInput
+                    style={tw`border-2 border-gray-300 rounded-lg p-4 text-lg bg-white text-center`}
+                    keyboardType="numeric"
+                    maxLength={2}
+                    value={(userData.height.inches || '').toString()}
+                    onChangeText={(text) => handleInchesInput(text)}
+                    placeholder="0"
+                  />
+                </View>
               </View>
-              <View style={tw`flex-1 ml-2`}>
-                <Text style={tw`text-sm text-center text-gray-500 mb-1`}>Inches</Text>
-                <TextInput
-                  style={tw`border-2 border-gray-300 rounded-lg p-4 text-xl bg-white text-center`}
-                  keyboardType="numeric"
-                  maxLength={2}
-                  value={(userData.height.inches || '').toString()}
-                  onChangeText={(text) => handleInchesInput(text)}
-                  placeholder="0"
-                />
+
+              <View style={tw`mt-3 items-center`}>
+                <Text style={tw`text-xl text-gray-800`}>
+                  {userData.height.feet} ft {userData.height.inches} in
+                </Text>
+                <Text style={tw`text-gray-500 text-sm`}>
+                  ({displayCm} cm)
+                </Text>
               </View>
             </View>
-
-            <View style={tw`mt-6 items-center`}>
-              <Text style={tw`text-3xl text-gray-800 font-light`}>
-                {userData.height.feet} ft {userData.height.inches} in
-              </Text>
-              <Text style={tw`text-gray-500 mt-1`}>
-                ({displayCm} cm)
-              </Text>
+          ) : (
+            <View style={tw`w-full`}>
+              <TextInput
+                style={tw`border-2 border-gray-300 rounded-lg p-4 text-lg bg-white text-center`}
+                keyboardType="numeric"
+                maxLength={3}
+                value={(displayCm || '').toString()}
+                onChangeText={(text) => handleCmInput(text)}
+                placeholder="0"
+              />
+              <View style={tw`mt-3 items-center`}>
+                <Text style={tw`text-xl text-gray-800`}>
+                  {displayCm} cm
+                </Text>
+                <Text style={tw`text-gray-500 text-sm`}>
+                  ({userData.height.feet} ft {userData.height.inches} in)
+                </Text>
+              </View>
             </View>
-          </View>
-        ) : (
-          <View style={tw`w-full px-4`}>
-            <Text style={tw`text-center text-2xl font-medium mb-4 text-gray-600`}>Enter your height</Text>
-            <TextInput
-              style={tw`border-2 border-gray-300 rounded-lg p-4 text-xl bg-white text-center`}
-              keyboardType="numeric"
-              maxLength={3}
-              value={(displayCm || '').toString()}
-              onChangeText={(text) => handleCmInput(text)}
-              placeholder="0"
-            />
-            <View style={tw`mt-6 items-center`}>
-              <Text style={tw`text-3xl text-gray-800 font-light`}>
-                {displayCm} cm
-              </Text>
-              <Text style={tw`text-gray-500 mt-1`}>
-                ({userData.height.feet} ft {userData.height.inches} in)
-              </Text>
-            </View>
-          </View>
-        )}
-      </View>
-    );
-  };
+          )}
+        </View>
 
-  const renderCurrentScreen = () => {
-    switch (currentScreen) {
-      case 0:
-        return renderNameAgeScreen();
-      case 1:
-        return renderGenderScreen();
-      case 2:
-        return renderHeightScreen();
-      default:
-        return renderNameAgeScreen();
-    }
-  };
+        {/* Info Card */}
+        <View style={tw`mt-2 mb-8 bg-blue-50 p-4 rounded-xl`}>
+          <Text style={tw`text-blue-800 font-medium mb-1 text-base`}>
+            Why we need this information
+          </Text>
+          <Text style={tw`text-blue-700 text-sm`}>
+            Your personal details help us create a customized fitness plan that's tailored to your specific needs and goals.
+          </Text>
+        </View>
+      </ScrollView>
 
-  return (
-    <SafeAreaView style={tw`flex-1 bg-white`}>
-      {renderCurrentScreen()}
-
-      <View style={tw`px-6 mb-10`}>
-        <Pressable
+      {/* Submit Button - Fixed at bottom */}
+      <View style={tw`px-6 py-4 border-t border-gray-200 bg-white`}>
+        <TouchableOpacity
           style={[
-            tw`rounded-full py-4 items-center justify-center`,
-            isCurrentScreenValid() ? tw`bg-blue-600` : tw`bg-gray-300`
+            tw`rounded-xl py-4 items-center justify-center`,
+            isFormValid() ? tw`bg-blue-600` : tw`bg-gray-300`
           ]}
-          onPress={handleNext}
-          disabled={!isCurrentScreenValid()}
+          onPress={handleSubmit}
+          disabled={!isFormValid()}
         >
           <Text style={tw`text-white font-bold text-lg`}>
-            {currentScreen === 2 ? 'FINISH' : 'NEXT'}
+            SAVE AND CONTINUE
           </Text>
-        </Pressable>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
 };
 
-export default InputFrom;
+export default InputForm;

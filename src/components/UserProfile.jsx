@@ -1,13 +1,16 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, Alert, ToastAndroid } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ArrowLeft, User, Calendar, Ruler } from 'lucide-react-native';
+import { ArrowLeft, User, Calendar, Ruler, LogOut } from 'lucide-react-native';
 import YourPlans from './Navigation/YourPlans';
 import tw from '../../tailwind';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { auth } from '../../firebase.config';
+import { signOut } from 'firebase/auth';
 
 const UserProfile = ({ navigation, route }) => {
   const { userData } = route.params;
+
 
   // Handle case where no user data is passed
   if (!userData) {
@@ -24,23 +27,41 @@ const UserProfile = ({ navigation, route }) => {
     );
   }
 
-  // Format height display based on the user's chosen unit
   const displayHeight = userData.heightUnit === "ft_in"
     ? `${userData.height.feet}'${userData.height.inches}"`
     : `${userData.height.cm} cm`;
+    const handleLogout = async () => {
+
+      try {
+        await signOut(auth);
+        ToastAndroid.show('Signed out successfully!', ToastAndroid.SHORT);
+        navigation.navigate('Authentication');
+        setError('');
+      } catch (error) {
+        ToastAndroid.show(error.message, ToastAndroid.LONG);
+        setError(error.message);
+      } finally {
+      }
+    };
+
 
   return (
     <SafeAreaView style={tw`flex-1 bg-gray-50`}>
-
-
-
       <ScrollView showsVerticalScrollIndicator={false}>
-
         {/* User Details Section */}
-        <View style={tw`px-5 `}>
-          <Text style={tw`text-2xl font-bold text-gray-800 mb-4 self-center mt-10`}>Personal Information</Text>
+        <View style={tw`px-5`}>
+          <View style={tw`flex-row justify-between items-center mb-2 mt-4`}>
+            <Text style={tw`text-2xl font-bold text-gray-800`}>Personal Information</Text>
+            <TouchableOpacity
+              style={tw`bg-red-500 py-2 px-4 rounded-lg flex-row items-center`}
+              onPress={handleLogout}
+            >
+              <LogOut size={16} color="#fff" />
+              <Text style={tw`text-white font-medium ml-2`}>Logout</Text>
+            </TouchableOpacity>
+          </View>
 
-          <View style={tw`bg-white rounded-xl shadow-sm `}>
+          <View style={tw`bg-white rounded-xl shadow-sm mt-2 mb-6`}>
             {/* Name */}
             <View style={tw`flex-row items-center p-4 border-b border-gray-100`}>
               <View style={tw`w-10 h-10 rounded-full bg-pink-100 items-center justify-center mr-4`}>
@@ -88,9 +109,8 @@ const UserProfile = ({ navigation, route }) => {
             </View>
           </View>
         </View>
+
         <YourPlans navigation={navigation} />
-
-
       </ScrollView>
     </SafeAreaView>
   );

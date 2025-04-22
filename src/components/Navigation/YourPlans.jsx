@@ -279,7 +279,7 @@ const YourPlans = ({ navigation }) => {
         Create your first workout plan to start tracking your fitness journey.
       </Text>
       <TouchableOpacity
-        onPress={() => navigation.navigate('CreateWorkoutPlan')}
+        onPress={() => navigation.navigate('CreatePlan')}
         style={tw`bg-pink-600 py-3 px-6 rounded-xl`}
       >
         <Text style={tw`text-white font-semibold text-center`}>Create New Plan</Text>

@@ -1,4 +1,4 @@
-// Home.js
+
 import { SafeAreaView, Text, View, Image, ScrollView, TouchableOpacity, ActivityIndicator, Alert } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import tw from '../../tailwind';
@@ -8,6 +8,7 @@ import Exercise from './Exercise';
 import WeeklyExercise from './WeeklyExercise';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Home as HomeIcon, List, User, Target } from 'lucide-react-native';
+
 
 const Home = ({ navigation, route }) => {
   const { userData } = route.params || {};
@@ -67,15 +68,16 @@ const Home = ({ navigation, route }) => {
         <StatusBar hidden={true} />
         <View style={tw`flex-1 px-5 pt-2`}>
           {/* Header */}
-          <View style={tw`flex-row mt-2`}>
+          <View style={tw`flex-row mt-10`}>
             <View style={tw`flex-1 mr-2`}>
               <Text style={tw`text-4xl text-gray-800 font-bold tracking-wider`}>READY TO</Text>
-              <Text style={tw`text-4xl text-pink-600 font-bold tracking-wider`}>WORKOUT {UserData?.name?.toUpperCase()}</Text>
+              <Text style={tw`text-4xl text-pink-600 font-bold tracking-wider`}>WORKOUT </Text>
             </View>
 
               <Image
                 source={require('../../assets/avatar.png')}
-                style={tw`w-16 h-16 rounded-full `}
+                style={tw`w-30 h-18 mt-[-10]`}
+                resizeMethod="resize"
                 resizeMode="cover"
               />
 
@@ -92,6 +94,9 @@ const Home = ({ navigation, route }) => {
           {/* Weekly Exercise */}
           <View>
             <WeeklyExercise navigation={navigation} />
+          </View>
+          <View>
+
           </View>
         </View>
       </ScrollView>

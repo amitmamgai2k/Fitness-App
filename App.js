@@ -14,17 +14,29 @@ import WorkoutSessionScreen from "./src/components/StartWorkout";
 import MyWorkouts from "./src/components/Navigation/MyWorkouts";
 import StepCounterApp from "./src/components/DailyStepsCount";
 import CreatePlan from "./src/components/Navigation/CreatePlan";
+import NutrientsChart from "./src/components/NutrientsChart";
+
+import AuthScreen from "./src/components/Navigation/Authentication";
+import { AuthProvider } from "./src/Context/UserContext";
 
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
 	return (
+    <AuthProvider>
 		<NavigationContainer>
 			<Stack.Navigator initialRouteName="Start">
 				<Stack.Screen
           name="Start"
           component={Start}
+          options={{
+            headerShown: false,
+          }}
+        />
+        	<Stack.Screen
+          name="Authentication"
+          component={AuthScreen}
           options={{
             headerShown: false,
           }}
@@ -106,12 +118,22 @@ const App = () => {
             headerShown: false,
           }}
         />
+          <Stack.Screen
+        name = 'nutrition-plan'
+        component={NutrientsChart }
+        options={{
+            headerShown: false,
+          }}
+        />
+
+
 
 
 
 
 			</Stack.Navigator>
 		</NavigationContainer>
+    </AuthProvider>
 	);
 };
 
